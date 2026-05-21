@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #1565c0;
+}
