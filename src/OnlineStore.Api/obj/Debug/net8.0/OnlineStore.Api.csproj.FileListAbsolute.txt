@@ -144,3 +144,4 @@ C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\refint
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\OnlineStore.Api.pdb
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\OnlineStore.Api.genruntimeconfig.cache
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\ref\OnlineStore.Api.dll
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\OnlineStore.Api.sourcelink.json

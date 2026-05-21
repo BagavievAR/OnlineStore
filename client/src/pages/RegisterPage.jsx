@@ -1,103 +1,81 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { apiFetch } from '../api/api'
 
-function mapRegisterError(message) {
-  if (!message) return ['Неизвестная ошибка']
-
-  try {
-    const parsed = JSON.parse(message)
-
-    if (Array.isArray(parsed)) {
-      return parsed.map((e) => {
-        switch (e.code) {
-          case 'PasswordTooShort':
-            return 'Пароль должен быть не короче 6 символов.'
-          case 'PasswordRequiresNonAlphanumeric':
-            return 'Пароль должен содержать хотя бы один спецсимвол.'
-          case 'PasswordRequiresDigit':
-            return 'Пароль должен содержать хотя бы одну цифру.'
-          case 'PasswordRequiresUpper':
-            return 'Пароль должен содержать хотя бы одну заглавную букву.'
-          case 'DuplicateUserName':
-            return 'Пользователь с таким именем уже существует.'
-          case 'DuplicateEmail':
-            return 'Пользователь с таким email уже существует.'
-          default:
-            return e.description || 'Ошибка регистрации.'
-        }
-      })
-    }
-
-    if (parsed.message) {
-      return [parsed.message]
-    }
-  } catch {
-    return [message]
-  }
-
-  return [message]
-}
-
 export default function RegisterPage() {
-  const [email, setEmail] = useState('')
-  const [userName, setUserName] = useState('')
-  const [password, setPassword] = useState('')
+  const [form, setForm] = useState({
+    userName: '',
+    email: '',
+    password: '',
+  })
+  const [error, setError] = useState('')
   const [message, setMessage] = useState('')
-  const [errors, setErrors] = useState([])
-  const navigate = useNavigate()
 
-  const submit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setErrors([])
-    setMessage('')
 
     try {
-      const data = await apiFetch('/Auth/register', {
+      await apiFetch('/Auth/register', {
         method: 'POST',
-        body: JSON.stringify({ email, userName, password }),
+        body: JSON.stringify(form),
       })
 
-      setMessage(data.message)
-      setTimeout(() => navigate('/login'), 1000)
+      setMessage('Регистрация прошла успешно. Теперь можно войти.')
+      setError('')
+      setForm({
+        userName: '',
+        email: '',
+        password: '',
+      })
     } catch (err) {
-      setErrors(mapRegisterError(err.message))
+      setError(err.message)
+      setMessage('')
     }
   }
 
   return (
-    <div>
-      <h2>Регистрация</h2>
+    <div style={{ maxWidth: '520px', margin: '0 auto' }}>
+      <div className="page-header">
+        <h1 className="page-title">Регистрация</h1>
+        <p className="page-subtitle">
+          Создай аккаунт пользователя для оформления заказов и работы с корзиной.
+        </p>
+      </div>
 
-      <form onSubmit={submit} style={{ display: 'grid', gap: '10px', maxWidth: '400px' }}>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          placeholder="Имя пользователя"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Пароль"
-        />
-        <button type="submit">Зарегистрироваться</button>
-      </form>
+      {message && <div className="alert alert-success">{message}</div>}
+      {error && <div className="alert alert-error">{error}</div>}
 
-      {message && <p style={{ color: 'green' }}>{message}</p>}
+      <div className="panel">
+        <form className="form-grid" onSubmit={handleSubmit}>
+          <input
+            className="input"
+            placeholder="Имя пользователя"
+            value={form.userName}
+            onChange={(e) => setForm({ ...form, userName: e.target.value })}
+          />
 
-      {errors.length > 0 && (
-        <ul style={{ color: 'red', marginTop: '10px' }}>
-          {errors.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-      )}
+          <input
+            className="input"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+
+          <input
+            className="input"
+            type="password"
+            placeholder="Пароль"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+
+          <div className="actions">
+            <button className="btn btn-primary" type="submit">
+              Зарегистрироваться
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

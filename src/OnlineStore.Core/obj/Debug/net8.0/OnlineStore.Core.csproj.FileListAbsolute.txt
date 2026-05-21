@@ -10,3 +10,4 @@ C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Debug\net8.0\Onlin
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Debug\net8.0\refint\OnlineStore.Core.dll
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Debug\net8.0\OnlineStore.Core.pdb
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Debug\net8.0\ref\OnlineStore.Core.dll
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Debug\net8.0\OnlineStore.Core.sourcelink.json

@@ -1,5 +1,11 @@
 import { useMemo, useState } from 'react'
-import { apiFetch, clearCart, getCart, removeFromCart, updateCartQty } from '../api/api'
+import {
+  apiFetch,
+  clearCart,
+  getCart,
+  removeFromCart,
+  updateCartQty,
+} from '../api/api'
 
 export default function CartPage() {
   const [cart, setCart] = useState(getCart())
@@ -26,6 +32,7 @@ export default function CartPage() {
     try {
       if (cart.length === 0) {
         setError('Корзина пуста')
+        setMessage('')
         return
       }
 
@@ -53,69 +60,110 @@ export default function CartPage() {
 
   return (
     <div>
-      <h2>Корзина</h2>
+      <div className="page-header">
+        <h1 className="page-title">Корзина</h1>
+        <p className="page-subtitle">
+          Проверь состав заказа, количество товаров и оформи покупку.
+        </p>
+      </div>
 
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {message && <div className="alert alert-success">{message}</div>}
+      {error && <div className="alert alert-error">{error}</div>}
 
       {cart.length === 0 ? (
-        <p>Корзина пуста</p>
+        <div className="empty-state">Корзина пуста.</div>
       ) : (
         <>
-          <div style={{ display: 'grid', gap: '12px', marginBottom: '20px' }}>
+          <div className="grid" style={{ marginBottom: '22px' }}>
             {cart.map((item) => (
-              <div
-                key={item.productId}
-                style={{
-                  border: '1px solid #ccc',
-                  padding: '12px',
-                  borderRadius: '8px',
-                  background: '#fff',
-                }}
-              >
-                {item.imageUrl && (
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    style={{
-                      width: '140px',
-                      height: '140px',
-                      objectFit: 'cover',
-                      borderRadius: '8px',
-                      marginBottom: '10px',
-                    }}
-                  />
-                )}
+              <div className="card" key={item.productId}>
+                <div className="card-body">
+                  <div className="cart-row">
+                    <div>
+                      {item.imageUrl ? (
+                        <img
+                          className="cart-image"
+                          src={item.imageUrl}
+                          alt={item.title}
+                        />
+                      ) : (
+                        <div
+                          className="cart-image"
+                          style={{
+                            display: 'grid',
+                            placeItems: 'center',
+                            color: '#6b7280',
+                            fontWeight: 600,
+                          }}
+                        >
+                          Нет фото
+                        </div>
+                      )}
+                    </div>
 
-                <h3>{item.title}</h3>
-                <p>Цена: {item.price}</p>
+                    <div>
+                      <h2 className="card-title">{item.title}</h2>
+                      <p className="card-text">Цена за единицу: {item.price}</p>
+                      <p className="card-text">Сумма: {item.price * item.qty}</p>
 
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <button onClick={() => changeQty(item.productId, item.qty - 1)}>-</button>
-                  <span>Количество: {item.qty}</span>
-                  <button onClick={() => changeQty(item.productId, item.qty + 1)}>+</button>
+                      <div className="actions">
+                        <div className="qty-box">
+                          <button className="btn" onClick={() => changeQty(item.productId, item.qty - 1)}>
+                            -
+                          </button>
+                          <span className="qty-value">{item.qty}</span>
+                          <button className="btn" onClick={() => changeQty(item.productId, item.qty + 1)}>
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeItem(item.productId)}
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
                 </div>
-
-                <p>Сумма: {item.price * item.qty}</p>
-
-                <button onClick={() => removeItem(item.productId)}>Удалить</button>
               </div>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gap: '10px', maxWidth: '420px' }}>
-            <input
-              value={deliveryAddress}
-              onChange={(e) => setDeliveryAddress(e.target.value)}
-              placeholder="Адрес доставки"
-            />
-            <input
-              value={contactPhone}
-              onChange={(e) => setContactPhone(e.target.value)}
-              placeholder="Телефон"
-            />
-            <p><b>Итого:</b> {total}</p>
-            <button onClick={submitOrder}>Оформить заказ</button>
+          <div className="panel">
+            <div className="page-header" style={{ marginBottom: '16px' }}>
+              <h2 className="page-title" style={{ fontSize: '24px' }}>Оформление заказа</h2>
+              <p className="page-subtitle">Заполни адрес и телефон для доставки.</p>
+            </div>
+
+            <div className="form-grid">
+              <input
+                className="input"
+                value={deliveryAddress}
+                onChange={(e) => setDeliveryAddress(e.target.value)}
+                placeholder="Адрес доставки"
+              />
+
+              <input
+                className="input"
+                value={contactPhone}
+                onChange={(e) => setContactPhone(e.target.value)}
+                placeholder="Телефон"
+              />
+
+              <p style={{ margin: 0, fontWeight: 700 }}>
+                Итого: {total}
+              </p>
+
+              <div className="actions">
+                <button className="btn btn-primary" onClick={submitOrder}>
+                  Оформить заказ
+                </button>
+              </div>
+            </div>
           </div>
         </>
       )}
