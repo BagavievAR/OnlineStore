@@ -1,0 +1,13 @@
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\bin\Release\net8.0\OnlineStore.Core.deps.json
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\bin\Release\net8.0\OnlineStore.Core.dll
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\bin\Release\net8.0\OnlineStore.Core.pdb
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.csproj.AssemblyReference.cache
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.AssemblyInfoInputs.cache
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.AssemblyInfo.cs
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.csproj.CoreCompileInputs.cache
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.sourcelink.json
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.dll
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\refint\OnlineStore.Core.dll
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\OnlineStore.Core.pdb
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Core\obj\Release\net8.0\ref\OnlineStore.Core.dll

@@ -1,4 +1,15 @@
-const API_BASE = 'http://localhost:5182/api'
+const API_BASE = '/api'
+
+function readJsonFromStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key)
+    if (!raw) return fallback
+    return JSON.parse(raw)
+  } catch {
+    localStorage.removeItem(key)
+    return fallback
+  }
+}
 
 export function getToken() {
   return localStorage.getItem('token')
@@ -14,8 +25,7 @@ export function clearToken() {
 }
 
 export function getUser() {
-  const raw = localStorage.getItem('user')
-  return raw ? JSON.parse(raw) : null
+  return readJsonFromStorage('user', null)
 }
 
 export function setUser(user) {
@@ -23,8 +33,7 @@ export function setUser(user) {
 }
 
 export function getCart() {
-  const raw = localStorage.getItem('cart')
-  return raw ? JSON.parse(raw) : []
+  return readJsonFromStorage('cart', [])
 }
 
 export function saveCart(cart) {
@@ -90,7 +99,17 @@ export async function apiFetch(path, options = {}) {
 
   if (!response.ok) {
     const text = await response.text()
-    throw new Error(text || 'Request failed')
+
+    try {
+      const json = JSON.parse(text)
+      throw new Error(json.message || json.title || 'Request failed')
+    } catch {
+      throw new Error(text || 'Request failed')
+    }
+  }
+
+  if (response.status === 204) {
+    return null
   }
 
   const contentType = response.headers.get('content-type')
@@ -98,5 +117,5 @@ export async function apiFetch(path, options = {}) {
     return await response.json()
   }
 
-  return null
+  return await response.text()
 }

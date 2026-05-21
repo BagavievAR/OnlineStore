@@ -145,3 +145,4 @@ C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\Online
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\OnlineStore.Api.genruntimeconfig.cache
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\ref\OnlineStore.Api.dll
 C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\obj\Debug\net8.0\OnlineStore.Api.sourcelink.json
+C:\Users\Kakusso\Desktop\OnlineStore\src\OnlineStore.Api\bin\Debug\net8.0\appsettings.Production.json
